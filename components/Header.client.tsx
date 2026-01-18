@@ -160,12 +160,18 @@ export default function HeaderClient({ user, categories }: HeaderProps) {
 
         <div className="hidden lg:flex lg:flex-2 lg:justify-end">
           <div className="flex items-center gap-x-8">
-            <a href="#" className="text-sm font-semibold text-gray-900">
+            <Link
+              href="/dashboard"
+              className="text-sm font-semibold text-gray-900"
+            >
               Dashboard
-            </a>
-            <a href="/path" className="text-sm font-semibold text-gray-900">
+            </Link>
+            <Link
+              href="/path"
+              className="text-sm font-semibold text-gray-900"
+            >
               Learning Paths
-            </a>
+            </Link>
             <a href="#" className="text-sm font-semibold text-gray-900">
               Apply Jobs
             </a>
@@ -265,18 +271,20 @@ export default function HeaderClient({ user, categories }: HeaderProps) {
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
-                <a
-                  href="#"
+                <Link
+                  href="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Dashboard
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  href="/path"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Learning Paths
-                </a>
+                </Link>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
