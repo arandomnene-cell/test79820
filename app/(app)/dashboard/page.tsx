@@ -132,7 +132,7 @@ export default async function DashboardPage() {
                 - Total = 494px
                 - Setting height to 31rem (496px) ensures near-perfect alignment
             */}
-            <section className="bg-slate-50 rounded-3xl border border-slate-200/60 p-6 shadow-sm flex flex-col h-auto lg:h-[31rem]">
+            <section className="bg-slate-50 rounded-3xl border border-slate-200/60 p-6 shadow-sm flex flex-col h-auto lg:h-[30.63rem]">
               <div className="flex items-center justify-between mb-6 shrink-0">
                 <h2 className="text-xl font-bold text-slate-900 tracking-tight">
                   My Courses
