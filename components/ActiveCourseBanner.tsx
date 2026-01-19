@@ -1,10 +1,24 @@
 import Link from "next/link";
 
-interface ActiveCourseBannerProps {
-  activeEnrollment: any;
+interface ActiveEnrollment {
+  progressPercent: number;
+  course: {
+    title: string;
+    slug: string;
+    level: string;
+    category: {
+      name: string;
+    };
+  };
 }
 
-export function ActiveCourseBanner({ activeEnrollment }: ActiveCourseBannerProps) {
+interface ActiveCourseBannerProps {
+  activeEnrollment?: ActiveEnrollment | null;
+}
+
+export function ActiveCourseBanner({
+  activeEnrollment,
+}: ActiveCourseBannerProps) {
   if (!activeEnrollment) {
     return (
       <div className="w-full p-8 bg-slate-50 rounded-3xl border border-slate-100 text-center flex flex-col items-center justify-center min-h-[230px]">

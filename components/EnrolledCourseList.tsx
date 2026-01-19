@@ -1,12 +1,27 @@
 import { EnrolledCourseCard } from "@/components/EnrolledCourseCard";
 
+interface EnrollmentWithCourse {
+  id: string;
+  progressPercent: number;
+  course: {
+    title: string;
+    slug: string;
+    level: string;
+    duration: number | null;
+    category: {
+      name: string;
+    };
+  };
+  isFavorite?: boolean;
+}
+
 interface EnrolledCourseListProps {
-  courses: any[];
+  courses: EnrollmentWithCourse[];
 }
 
 export function EnrolledCourseList({ courses }: EnrolledCourseListProps) {
   return (
-    <section className="flex-1 w-full min-w-0 bg-slate-50 rounded-3xl border border-slate-200/60 p-5 shadow-sm flex flex-col h-auto lg:h-[26rem]">
+    <section className="bg-slate-50 rounded-3xl border border-slate-200/60 p-5 shadow-sm flex flex-col h-full">
       <div className="flex items-center justify-between mb-4 shrink-0">
         <h2 className="text-lg font-bold text-slate-900 tracking-tight">
           My Courses

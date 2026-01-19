@@ -61,21 +61,25 @@ export default async function DashboardPage() {
 
   return (
     <main className="bg-white min-h-screen max-w-7xl mx-auto px-6 py-6 lg:px-8 flex flex-row flex-wrap content-start gap-6 lg:gap-8">
-      <header className="pt-2 w-full">
-        <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tighter text-slate-900 leading-tight">
-          Hello, <span className="text-eduBlue">{name}</span>
-        </h1>
-      </header>
+      <h1 className="pt-2 w-full text-4xl lg:text-5xl font-extrabold tracking-tighter text-slate-900 leading-tight">
+        Hello, <span className="text-eduBlue">{name}</span>
+      </h1>
 
-      <ActiveCourseBanner activeEnrollment={activeEnrollment} />
+      <div className="w-full">
+        <ActiveCourseBanner activeEnrollment={activeEnrollment} />
+      </div>
 
-      <EnrolledCourseList courses={sortedCourses} />
+      <div className="flex-1 w-full min-w-0 h-auto lg:h-[26rem]">
+        <EnrolledCourseList courses={sortedCourses} />
+      </div>
 
-      <DashboardStats
-        inProgressCount={inProgressCount}
-        completedCount={completedCount}
-        hoursSpent={hoursSpent}
-      />
+      <div className="w-full lg:w-64 shrink-0">
+        <DashboardStats
+          inProgressCount={inProgressCount}
+          completedCount={completedCount}
+          hoursSpent={hoursSpent}
+        />
+      </div>
     </main>
   );
 }
