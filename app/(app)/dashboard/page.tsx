@@ -55,21 +55,62 @@ export default async function DashboardPage() {
     enrollments.find((e) => e.status === "IN_PROGRESS") || enrollments[0];
 
   return (
-    <main className="bg-white p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-8 lg:gap-12 relative">
+    <main className="bg-white p-6 lg:p-8 min-h-screen">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-8 lg:gap-10">
         
-        <div className="lg:w-2/3 flex flex-col gap-8">
+        <aside className="w-full lg:w-72 shrink-0 flex flex-col gap-8">
           
-          <header className="shrink-0 pt-2">
+          <header className="pt-2">
             <h1 className="text-5xl lg:text-6xl font-extrabold tracking-tighter text-slate-900 leading-tight">
               Hello, <span className="text-eduBlue">{name}</span>
             </h1>
           </header>
 
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:flex lg:flex-col gap-4">
+            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center gap-2 hover:bg-slate-100 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-eduBlue mb-1">
+                <BookOpen className="w-5 h-5" />
+              </div>
+              <span className="text-3xl font-bold text-slate-900">
+                {inProgressCount}
+              </span>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                In Progress
+              </span>
+            </div>
+
+            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center gap-2 hover:bg-slate-100 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mb-1">
+                <CheckCircle className="w-5 h-5" />
+              </div>
+              <span className="text-3xl font-bold text-slate-900">
+                {completedCount}
+              </span>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                Completed
+              </span>
+            </div>
+
+            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center gap-2 hover:bg-slate-100 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mb-1">
+                <Clock className="w-5 h-5" />
+              </div>
+              <span className="text-3xl font-bold text-slate-900">
+                {hoursSpent}
+              </span>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                Hours Spent
+              </span>
+            </div>
+          </div>
+        </aside>
+
+        <div className="flex-1 w-full flex flex-col gap-8 min-w-0">
+          
           {activeEnrollment ? (
             <section className="w-full shrink-0">
               <Link href={`/courses/${activeEnrollment.course.slug}`}>
-                <div className="w-full bg-eduBlue rounded-3xl p-8 shadow-xl shadow-blue-900/10 text-white relative overflow-hidden group transition-transform active:scale-[0.98] duration-200 min-h-[280px] flex flex-col justify-between">
+                <div className="w-full bg-eduBlue rounded-3xl p-8 shadow-xl shadow-blue-900/10 text-white relative overflow-hidden group transition-transform active:scale-[0.99] duration-200 min-h-[260px] flex flex-col justify-between">
                   <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl pointer-events-none" />
 
                   <div className="relative z-10 flex flex-col gap-6">
@@ -80,7 +121,7 @@ export default async function DashboardPage() {
                     </div>
 
                     <div>
-                      <h2 className="text-3xl lg:text-4xl font-bold leading-tight mb-3">
+                      <h2 className="text-2xl lg:text-4xl font-bold leading-tight mb-2">
                         {activeEnrollment.course.title}
                       </h2>
 
@@ -92,13 +133,13 @@ export default async function DashboardPage() {
                   </div>
 
                   <div className="relative z-10 space-y-3 w-full mt-6">
-                    <div className="flex justify-between text-xs font-bold text-blue-50 tracking-widest uppercase">
-                      <span>Current Progress</span>
-                      <span>{Math.round(activeEnrollment.progressPercent)}%</span>
+                    <div className="flex justify-between items-end">
+                      <span className="text-xs font-bold text-blue-50 tracking-widest uppercase mb-1">Current Progress</span>
+                      <span className="text-3xl font-bold text-white">{Math.round(activeEnrollment.progressPercent)}%</span>
                     </div>
                     <div className="h-3 w-full bg-black/20 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-emerald-400 rounded-full shadow-[0_0_15px_rgba(52,211,153,0.6)]"
+                        className="h-full bg-emerald-400 rounded-full shadow-[0_0_15px_rgba(52,211,153,0.6)] transition-all duration-1000 ease-out"
                         style={{ width: `${activeEnrollment.progressPercent}%` }}
                       />
                     </div>
@@ -107,7 +148,7 @@ export default async function DashboardPage() {
               </Link>
             </section>
           ) : (
-            <div className="p-10 bg-slate-50 rounded-3xl border border-slate-100 text-center flex flex-col items-center justify-center min-h-[280px]">
+            <div className="p-10 bg-slate-50 rounded-3xl border border-slate-100 text-center flex flex-col items-center justify-center min-h-[260px]">
               <p className="text-slate-500 mb-6 text-lg">
                 You haven't enrolled in any courses yet.
               </p>
@@ -120,48 +161,7 @@ export default async function DashboardPage() {
             </div>
           )}
 
-          <section className="grid grid-cols-3 gap-4 shrink-0">
-            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-eduBlue mb-1">
-                <BookOpen className="w-5 h-5" />
-              </div>
-              <span className="text-3xl font-bold text-slate-900">
-                {inProgressCount}
-              </span>
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                In Progress
-              </span>
-            </div>
-
-            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mb-1">
-                <CheckCircle className="w-5 h-5" />
-              </div>
-              <span className="text-3xl font-bold text-slate-900">
-                {completedCount}
-              </span>
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                Completed
-              </span>
-            </div>
-
-            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mb-1">
-                <Clock className="w-5 h-5" />
-              </div>
-              <span className="text-3xl font-bold text-slate-900">
-                {hoursSpent}
-              </span>
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                Hours Spent
-              </span>
-            </div>
-          </section>
-        </div>
-
-        <div className="lg:w-1/3 relative min-h-[500px] lg:min-h-0">
-          <div className="lg:absolute lg:inset-0 flex flex-col h-full bg-slate-50 rounded-3xl border border-slate-200/60 p-6 overflow-hidden shadow-sm">
-            
+          <section className="bg-slate-50 rounded-3xl border border-slate-200/60 p-6 shadow-sm flex flex-col max-h-[calc(100vh-2rem)]">
             <div className="flex items-center justify-between mb-6 shrink-0">
               <h2 className="text-xl font-bold text-slate-900 tracking-tight">
                 My Courses
@@ -174,7 +174,7 @@ export default async function DashboardPage() {
               </Link>
             </div>
 
-            <div className="flex-1 overflow-y-auto space-y-4 pr-2 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+            <div className="overflow-y-auto space-y-4 pr-2 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
               {sortedCourses.length > 0 ? (
                 sortedCourses.map((item) => (
                   <Link
@@ -188,7 +188,7 @@ export default async function DashboardPage() {
                       </div>
                     )}
 
-                    <div className="w-16 h-16 rounded-xl bg-slate-100 overflow-hidden flex-shrink-0">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-slate-100 overflow-hidden flex-shrink-0">
                       <img
                         src={item.course.thumbnailUrl || "/thumbnail.jpeg"}
                         alt={item.course.title}
@@ -196,24 +196,27 @@ export default async function DashboardPage() {
                       />
                     </div>
 
-                    <div className="flex-1 min-w-0 flex flex-col justify-center gap-0.5">
-                      <h3 className="font-bold text-slate-900 text-sm leading-snug line-clamp-1 group-hover:text-eduBlue transition-colors pr-6">
+                    <div className="flex-1 min-w-0 flex flex-col justify-center gap-1">
+                      <h3 className="font-bold text-slate-900 text-base leading-snug line-clamp-1 group-hover:text-eduBlue transition-colors pr-6">
                         {item.course.title}
                       </h3>
 
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between gap-4">
                         <span className="text-xs text-slate-500 truncate">
                           {item.course.category.name}
                         </span>
-                        <span
-                          className={`text-sm font-black ${
-                            item.progressPercent >= 100
-                              ? "text-emerald-500"
-                              : "text-slate-300 group-hover:text-eduBlue transition-colors"
-                          }`}
-                        >
-                          {Math.round(item.progressPercent)}%
-                        </span>
+                        
+                        <div className="flex items-center gap-2 shrink-0">
+                            <span
+                            className={`text-base font-black ${
+                                item.progressPercent >= 100
+                                ? "text-emerald-500"
+                                : "text-slate-300 group-hover:text-eduBlue transition-colors"
+                            }`}
+                            >
+                            {Math.round(item.progressPercent)}%
+                            </span>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -224,7 +227,7 @@ export default async function DashboardPage() {
                 </div>
               )}
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </main>
