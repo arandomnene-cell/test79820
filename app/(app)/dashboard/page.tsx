@@ -55,8 +55,8 @@ export default async function DashboardPage() {
     enrollments.find((e) => e.status === "IN_PROGRESS") || enrollments[0];
 
   return (
-    <main className="bg-white p-5 lg:p-6 min-h-screen">
-      <div className="max-w-7xl mx-auto flex flex-col gap-6 lg:gap-8">
+    <main className="bg-white min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 py-6 lg:px-8 flex flex-col gap-6 lg:gap-8">
         
         <header className="pt-2">
           <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tighter text-slate-900 leading-tight">
@@ -126,12 +126,6 @@ export default async function DashboardPage() {
                 <h2 className="text-lg font-bold text-slate-900 tracking-tight">
                   My Courses
                 </h2>
-                <Link
-                  href="/courses"
-                  className="text-[10px] font-bold text-eduBlue hover:underline uppercase tracking-wide"
-                >
-                  View All
-                </Link>
               </div>
 
               <div className="overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent flex-1">
